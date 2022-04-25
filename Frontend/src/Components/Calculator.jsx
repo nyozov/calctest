@@ -20,7 +20,7 @@ export default function Calculator() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
 
     try {
       const { left, right, operation } = formResults;
@@ -35,9 +35,9 @@ export default function Calculator() {
       console.log(res.data.exp);
       setExpression(res.data.exp);
 
-      setTimeout(()=> {
-        setLoading(false)
-      }, 1000)
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     } catch (error) {
       console.log("axios error:", error.message);
     }
@@ -47,7 +47,7 @@ export default function Calculator() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="bg-gray-200 w-screen flex flex-col md:flex-row justify-center items-center md:justify-evenly p-12">
+        <div className="bg-gray-200 w-screen h-full flex flex-col md:flex-row justify-center items-center md:justify-evenly p-12">
           <div>
             <p>Left Operand</p>
             <input
@@ -56,7 +56,7 @@ export default function Calculator() {
               value={formResults.left}
               type="number"
               name="left"
-              className=" rounded p-1"
+              className=" rounded p-1 shadow"
             />
           </div>
 
@@ -121,21 +121,20 @@ export default function Calculator() {
               value={formResults.right}
               type="number"
               name="right"
-              className=" rounded p-1"
+              className=" rounded p-1 shadow"
             />
           </div>
         </div>
 
-        <div className="flex flex-col w-screen justify-center items-center md:items-start text-center md:pl-16 md:text-left lg:justify-start p-12 bg-gray-200">
+        <div className="flex flex-col w-screen h-full justify-center items-center md:items-start text-center md:pl-16 md:text-left lg:justify-start p-12 bg-gray-200">
           <button
             type="submit"
             className="bg-blue-500 w-[150px] flex justify-center items-center hover:bg-blue-600 cursor-pointer rounded text-white p-1 px-3 shadow-md"
           >
-            {loading? <Loader/> : <p>Calculate</p>}
+            {loading ? <Loader /> : <p>Calculate</p>}
           </button>
           <div>Expression:{expression && <p>{expression}</p>} </div>
           <div>Result:{answer && !loading && <p>{answer}</p>}</div>
-         
         </div>
       </form>
     </div>
