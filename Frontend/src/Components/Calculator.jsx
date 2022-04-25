@@ -38,7 +38,7 @@ export default function Calculator() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="bg-gray-200 w-screen flex flex-col md:flex-row justify-evenly p-12">
+        <div className="bg-gray-200 w-screen flex flex-col md:flex-row justify-center items-center md:justify-evenly p-12">
           <div>
             <p>Left Operand</p>
             <input
@@ -104,7 +104,7 @@ export default function Calculator() {
             </div>
           </div>
 
-          <div>
+          <div className='mt-12 md:mt-0'>
             <p>Right Operand</p>
             <input
               required
@@ -117,7 +117,7 @@ export default function Calculator() {
           </div>
         </div>
 
-        <div className="flex flex-col border border-black w-screen justify-center items-center md:items-start text-center md:text-left lg:justify-start p-12 bg-gray-200">
+        <div className="flex flex-col w-screen justify-center items-center md:items-start text-center md:pl-16 md:text-left lg:justify-start p-12 bg-gray-200">
           <button
             type="submit"
             className="bg-blue-500 w-[150px] flex justify-center items-center hover:bg-blue-600 cursor-pointer rounded text-white p-1 px-3 shadow-md"
