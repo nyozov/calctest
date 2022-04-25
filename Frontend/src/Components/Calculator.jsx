@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import Loader from "./Loader";
 
 export default function Calculator() {
-  const [answer, setAnswer] = useState('');
-  const [expression, setExpression] = useState('');
+  const [answer, setAnswer] = useState("");
+  const [expression, setExpression] = useState("");
+  const [loading, setLoading] = useState(false);
   const [formResults, setFormResults] = useState({
     left: "",
     right: "",
@@ -18,17 +20,24 @@ export default function Calculator() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
+    setLoading(true)
+
     try {
       const { left, right, operation } = formResults;
-      const res = await axios.post("http://localhost:8000/calculate", { left, right, operation })
-    
-        console.log(res.data.response)
-        setAnswer(res.data.response)
-        console.log(res.data.exp)
-        setExpression(res.data.exp)
-     
-      
+      const res = await axios.post("http://localhost:8000/calculate", {
+        left,
+        right,
+        operation,
+      });
+
+      console.log(res.data.response);
+      setAnswer(res.data.response);
+      console.log(res.data.exp);
+      setExpression(res.data.exp);
+
+      setTimeout(()=> {
+        setLoading(false)
+      }, 1000)
     } catch (error) {
       console.log("axios error:", error.message);
     }
@@ -104,7 +113,7 @@ export default function Calculator() {
             </div>
           </div>
 
-          <div className='mt-12 md:mt-0'>
+          <div className="mt-12 md:mt-0">
             <p>Right Operand</p>
             <input
               required
@@ -122,10 +131,11 @@ export default function Calculator() {
             type="submit"
             className="bg-blue-500 w-[150px] flex justify-center items-center hover:bg-blue-600 cursor-pointer rounded text-white p-1 px-3 shadow-md"
           >
-            Calculate
+            {loading? <Loader/> : <p>Calculate</p>}
           </button>
           <div>Expression:{expression && <p>{expression}</p>} </div>
-          <div>Result:{answer && <p>{answer}</p>}</div>
+          <div>Result:{answer && !loading && <p>{answer}</p>}</div>
+         
         </div>
       </form>
     </div>
