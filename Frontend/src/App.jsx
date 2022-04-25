@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App min-h-screen bg-gray-200">
       <Title/>
-      <Calculator/>
+      <Calculator/> 
   
     </div>
   );
